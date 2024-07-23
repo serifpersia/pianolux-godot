@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://d6mm62mf1cw8"]
+
+[ext_resource type="Script" path="res://scripts/WebcamStreaming.cs" id="1_ourqo"]
+[ext_resource type="Material" uid="uid://c8cdksdpdcceo" path="res://materials/webcam_mat.tres" id="2_5gtd2"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_opewt"]
+material = ExtResource("2_5gtd2")
+size = Vector2(44, 25)
+
+[node name="WebcamFeed" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16.135)
+mesh = SubResource("QuadMesh_opewt")
+script = ExtResource("1_ourqo")
+WebCamFeedMaterial = ExtResource("2_5gtd2")

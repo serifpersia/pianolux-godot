@@ -5,17 +5,20 @@ using Emgu.CV.Structure;
 using System.Drawing; // For System.Drawing.Bitmap
 using System.IO; // For MemoryStream
 
-public partial class WebcamStreaming : TextureRect
+public partial class WebcamStreaming : MeshInstance3D
 {
+	[Export]
+	public StandardMaterial3D WebCamFeedMaterial;
+
 	private VideoCapture _videoCapture;
 	private float _frameInterval = 1.0f / 60.0f;
 	private double _timeSinceLastFrame = 0.0f;
 
 	public override void _Ready()
 	{
-		_videoCapture = new VideoCapture(0);
-		_videoCapture.Set(Emgu.CV.CvEnum.CapProp.FrameWidth, 640);
-		_videoCapture.Set(Emgu.CV.CvEnum.CapProp.FrameHeight, 480);
+		_videoCapture = new VideoCapture();
+		_videoCapture.Set(Emgu.CV.CvEnum.CapProp.FrameWidth, 1920);
+		_videoCapture.Set(Emgu.CV.CvEnum.CapProp.FrameHeight, 1080);
 		_videoCapture.Set(Emgu.CV.CvEnum.CapProp.Fps, 60);
 	}
 
@@ -49,7 +52,13 @@ public partial class WebcamStreaming : TextureRect
 				Godot.Image img = ConvertBitmapToGodotImage(bitmap);
 
 				// Create an ImageTexture from the Godot Image
-				Texture = ImageTexture.CreateFromImage(img);
+				ImageTexture imageTexture = ImageTexture.CreateFromImage(img);
+
+				// Set the albedo texture of the material
+				if (WebCamFeedMaterial != null)
+				{
+					WebCamFeedMaterial.AlbedoTexture = imageTexture;
+				}
 			}
 			catch (Exception ex)
 			{
