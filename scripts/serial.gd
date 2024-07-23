@@ -11,6 +11,10 @@ extends Control
 @onready var piano_size_label = $"../CanvasLayer/PianoSize_Label"
 @onready var bg_brightness_slider = $"../CanvasLayer/BGBrightness_Slider"
 
+@export var webcam_scene: PackedScene  # Holds the packed scene (set this in the editor)
+
+var webcam_instance: Node = null  # Reference to the instantiated scene
+
 var serial = SerialPort.new()
 var port
 var baudrate = 115200
@@ -449,3 +453,19 @@ func _on_transposition_octave_shift_toggle_toggled(toggled_on):
 		octaveShift_Toggle = true
 	else:
 		octaveShift_Toggle = false
+
+
+func _on_webcam_toggle_button_toggled(toggled_on):
+	if toggled_on:
+		if webcam_instance == null:
+			# Instantiate the PackedScene
+			webcam_instance = webcam_scene.instantiate()
+			add_child(webcam_instance)
+		webcam_instance.visible = true
+	else:
+		if webcam_instance != null:
+			# Ensure the node is still in the scene tree before calling queue_free()
+			if has_node(webcam_instance.get_path()):
+				webcam_instance.visible = false
+				webcam_instance.queue_free()
+				webcam_instance = null  # Clear the reference after removal

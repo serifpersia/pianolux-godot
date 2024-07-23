@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://wlq8ui2nr4pw"]
+
+[ext_resource type="Script" path="res://scripts/WebcamStreaming.cs" id="1_w5w34"]
+
+[node name="WebcamVideoFeed" type="TextureRect"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_w5w34")

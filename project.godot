@@ -27,6 +27,10 @@ window/size/resizable=false
 window/stretch/mode="viewport"
 window/vsync/vsync_mode=0
 
+[dotnet]
+
+project/assembly_name="PianoLux"
+
 [input]
 
 ui_q={

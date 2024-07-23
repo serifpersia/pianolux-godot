@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://demetbmmfc3sm"]
+[gd_scene load_steps=18 format=3 uid="uid://demetbmmfc3sm"]
 
 [ext_resource type="Script" path="res://scripts/MIDI.gd" id="1_3ll4w"]
 [ext_resource type="Script" path="res://scripts/Virtual_Keyboard.gd" id="1_7mq6q"]
@@ -10,6 +10,7 @@
 [ext_resource type="Material" uid="uid://xdabkcdm3c8g" path="res://materials/black_key_mat.tres" id="3_mcpll"]
 [ext_resource type="PackedScene" uid="uid://bjgxxihfcew33" path="res://scenes/serial_list.tscn" id="3_y44n4"]
 [ext_resource type="PackedScene" uid="uid://b8sjcwx28odsw" path="res://scenes/open_close.tscn" id="4_pgseb"]
+[ext_resource type="PackedScene" uid="uid://wlq8ui2nr4pw" path="res://scenes/webcam_video_feed.tscn" id="6_vm0lf"]
 [ext_resource type="PackedScene" uid="uid://dtacf6kg6rwxg" path="res://scenes/spiral_particles.tscn" id="10_e3ntp"]
 [ext_resource type="Material" uid="uid://b5qeey5ruelw1" path="res://materials/particles_mat.tres" id="10_mr4d0"]
 [ext_resource type="Material" uid="uid://c87r7xa3yubcp" path="res://materials/bg_mat.tres" id="12_70sax"]
@@ -321,6 +322,13 @@ offset_top = 444.0
 offset_right = 328.0
 offset_bottom = 475.0
 
+[node name="WebcamToggle_Button" parent="MIDI/CanvasLayer" instance=ExtResource("4_pgseb")]
+offset_left = 39.0
+offset_top = 748.0
+offset_right = 332.0
+offset_bottom = 779.0
+text = "WebcamToggleTest"
+
 [node name="TranspositionOctaveShift_Toggle" parent="MIDI/CanvasLayer" instance=ExtResource("4_pgseb")]
 custom_minimum_size = Vector2(55, 0)
 offset_left = 276.0
@@ -394,6 +402,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("13_0vjy6")
+webcam_scene = ExtResource("6_vm0lf")
 
 [node name="BG" type="MeshInstance3D" parent="MIDI"]
 mesh = SubResource("QuadMesh_pxhi1")
@@ -435,6 +444,7 @@ particle_scene = ExtResource("10_e3ntp")
 [connection signal="item_selected" from="MIDI/CanvasLayer/ModesList" to="MIDI/Serial" method="_on_modes_list_item_selected"]
 [connection signal="item_selected" from="MIDI/CanvasLayer/AnimationsList" to="MIDI/Serial" method="_on_animations_list_item_selected"]
 [connection signal="toggled" from="MIDI/CanvasLayer/OpenClose" to="MIDI/Serial" method="_on_open_close_toggled"]
+[connection signal="toggled" from="MIDI/CanvasLayer/WebcamToggle_Button" to="MIDI/Serial" method="_on_webcam_toggle_button_toggled"]
 [connection signal="toggled" from="MIDI/CanvasLayer/TranspositionOctaveShift_Toggle" to="MIDI/Serial" method="_on_transposition_octave_shift_toggle_toggled"]
 [connection signal="pressed" from="MIDI/CanvasLayer/PianoSizeDecrease_Button" to="MIDI/Serial" method="_on_piano_size_decrease_button_pressed"]
 [connection signal="pressed" from="MIDI/CanvasLayer/PianoSizeIncrease_Button" to="MIDI/Serial" method="_on_piano_size_increase_button_pressed"]
